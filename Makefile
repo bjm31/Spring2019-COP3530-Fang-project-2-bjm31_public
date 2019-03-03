@@ -6,7 +6,7 @@ CC = g++
 #  -Wall turns on most, but not all, compiler warnings
 CFLAGS  = -std=c++11 -g -Wall
 
-OBJECTS = room.o passage.o player.o maze.o game.o
+OBJECTS = Room.o Passage.o Player.o Maze.o Game.o
 HEADERS := $(shell find . -path ./test -prune -o -name "*.hpp" -print)
 
 main: main.o $(OBJECTS)
