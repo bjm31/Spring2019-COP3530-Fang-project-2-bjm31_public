@@ -54,7 +54,7 @@ int Player::GetMoveCount() {
 	return this->moves;
 }
 
-void Player::incrementMoves() {
+void Player::IncrementMoves() {
 
 	++this->moves;
 }

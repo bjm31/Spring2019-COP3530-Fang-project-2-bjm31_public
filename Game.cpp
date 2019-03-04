@@ -66,7 +66,7 @@ void Game::DisplayPassages() {
 
 std::string Game::GetCurrentRoomName() {
 
-	return "You are in " + this->currentRoom->GetName() + "!\n";
+	return "\nYou are in " + this->currentRoom->GetName() + "!\n";
 }
 
 void Game::LootRoom() {
@@ -81,16 +81,73 @@ void Game::LootRoom() {
 
 bool Game::ValidDirection(std::string direction) {
 
-	return false;
+	bool check = false;
+	
+	if (direction == "n") {
+		check = this->currentRoom->GetNorthPassage()->IsOpen();
+		if (!check && this->player->Hasitem(this->currentRoom->GetNorthPassage()->GetRequiredKey())) {
+			this->currentRoom->GetNorthPassage()->Open();
+			check = true;
+		}
+	}
+
+	else if (direction == "e") {
+		check = this->currentRoom->GetEastPassage()->IsOpen();
+		if (!check && this->player->Hasitem(this->currentRoom->GetEastPassage()->GetRequiredKey())) {
+			this->currentRoom->GetEastPassage()->Open();
+			check = true;
+		}
+	}
+
+	else if (direction == "s") {
+		check = this->currentRoom->GetSouthPassage()->IsOpen();
+		if (!check && this->player->Hasitem(this->currentRoom->GetSouthPassage()->GetRequiredKey())) {
+			this->currentRoom->GetSouthPassage()->Open();
+			check = true;
+		}
+	}
+
+	else if (direction == "w") {
+		check = this->currentRoom->GetWestPassage()->IsOpen();
+		if (!check && this->player->Hasitem(this->currentRoom->GetWestPassage()->GetRequiredKey())) {
+			this->currentRoom->GetWestPassage()->Open();
+			check = true;
+		}
+	}
+
+	return check;
 }
 
 void Game::MoveDirection(std::string direction) {
+	
+	if (ValidDirection(direction)) {
 
-	this->currentRoom = maze->GetRoom(player->GetRow(),
-		player->GetCol());
+		if (direction == "n") {
+			this->player->SetPosition(this->player->GetRow() - 1, this->player->GetCol());
+		}
+		else if (direction == "e") {
+			this->player->SetPosition(this->player->GetRow(), this->player->GetCol() + 1);
+		}
+		else if (direction == "s") {
+			this->player->SetPosition(this->player->GetRow() + 1, this->player->GetCol());
+		}
+		else if (direction == "w") {
+			this->player->SetPosition(this->player->GetRow(), this->player->GetCol() - 1);
+		}
+		
+		this->player->IncrementMoves();
+		
+		this->currentRoom = this->maze->GetRoom(this->player->GetRow(), this->player->GetCol());
+	}
+
 }
 
 bool Game::ExitFound() {
+
+	if (this->GetCurrentRoomName().find("Exit") != -1) {
+		std::cout << "You made it out in " << this->player->GetMoveCount() << " moves.";
+		return true;
+	}
 
 	return false;
 }

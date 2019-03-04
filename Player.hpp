@@ -15,7 +15,7 @@ public:
 	bool Hasitem(std::string item);
 	void UseItem(std::string item);
 	int GetMoveCount();
-	void incrementMoves();
+	void IncrementMoves();
 
 private:
 	int row;

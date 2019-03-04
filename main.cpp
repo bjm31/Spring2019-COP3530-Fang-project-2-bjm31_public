@@ -14,6 +14,7 @@ int main() {
 	string direction;
 
 	cout << "Welcome to The Maze\n";
+
 	/*
 	cout << "Please enter the filename of your maze: ";
 	cin >> mazeFile;
@@ -24,8 +25,19 @@ int main() {
 	Player* player = new Player();
 
 	Game game = Game(maze, player);
-	game.DisplayItems();
-	game.DisplayPassages();
+
+	do {
+		game.DisplayItems();
+		game.DisplayPassages();
+
+		cout << "Which way would you like to move? ";
+		cin >> direction;
+
+		game.MoveDirection(direction);
+
+	} while (!game.ExitFound());
+
+	std::cout << "You made it out in " << game.
 
 	return 0;
 }
