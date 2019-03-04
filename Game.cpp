@@ -146,6 +146,7 @@ bool Game::ExitFound() {
 
 	if (this->GetCurrentRoomName().find("Exit") != -1) {
 		std::cout << "You made it out in " << this->player->GetMoveCount() << " moves.";
+		this->maze->~Maze();
 		return true;
 	}
 

@@ -151,9 +151,9 @@ int Maze::GetNumberCols() {
 
 Maze::~Maze() {
 
-	for (int i = 0; i < this->cols; ++i) {
-		delete[] this->rooms[i];
+	for (int i = 0; i < this->rows; ++i) {
+		delete[] rooms[i];
 	}
 
-	delete[] this;
+	delete[] rooms;
 }

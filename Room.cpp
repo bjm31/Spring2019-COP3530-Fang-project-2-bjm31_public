@@ -51,9 +51,9 @@ std::string Room::AcquireNextItem() {
 	
 	if (this->items.size() != 0) {
 		
-		temp = this->items.front();
+		temp = this->items.back();
 		
-		items.erase(items.begin());
+		items.pop_back();
 	}
 	
 	return temp;
