@@ -11,7 +11,7 @@ std::string Game::GetPassageDescription(Passage* passage) {
 	}
 
 	else if (passage->RequiresKey()) {
-		description += "doorway that requires a(n) " + passage->GetRequiredKey() + " to the ";
+		description += "door that requires a(n) " + passage->GetRequiredKey() + " to the ";
 	}
 
 	else {
@@ -24,30 +24,46 @@ std::string Game::GetPassageDescription(Passage* passage) {
 Game::Game(Maze* maze, Player* player) {
 	this->maze = maze;
 	this->player = player;
+	this->currentRoom = maze->GetRoom(0, 0);
+
+	LootRoom();
 }
 
 void Game::DisplayItems() {
 
-	std::cout << "Room Items:";
-	for (int i = 0; i < this->currentItems.size(); ++i) {
-		std::cout << " " << currentItems.at(i);
+	std::cout << "You picked up the following room items:";
+	int itemNum = this->currentItems.size();
+	for (int i = 0; i < itemNum; ++i) {
+		std::cout << " " << this->currentItems.at(i);
+		this->player->AddItem(this->currentItems.at(i));
 	}
 	std::cout << std::endl;
 }
 
 void Game::DisplayPassages() {
 
-	Passage* tempPassage = this->maze->GetRoom(this->player->GetRow(), 
-		this->player->GetCol())->GetNorthPassage();
+	std::cout << GetPassageDescription(this->currentRoom->GetNorthPassage()) << "North\n";
+	std::cout << GetPassageDescription(this->currentRoom->GetEastPassage()) << "East\n";
+	std::cout << GetPassageDescription(this->currentRoom->GetSouthPassage()) << "South\n";
+	std::cout << GetPassageDescription(this->currentRoom->GetWestPassage()) << "West\n";
+
 }
 
 std::string Game::GetCurrentRoomName() {
 
-	return this->currentRoom->GetName();
+	return "You are in " + this->currentRoom->GetName() + "!\n";
 }
 
 void Game::LootRoom() {
-	
+
+	std::string temp = this->currentRoom->AcquireNextItem();
+
+	while (temp != "") {
+		std::cout << temp << std::endl;
+		this->currentItems.push_back(temp);
+		temp = this->currentRoom->AcquireNextItem();
+		this->player->AddItem(temp);
+	}
 }
 
 bool Game::ValidDirection(std::string direction) {

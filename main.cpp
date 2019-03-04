@@ -17,12 +17,15 @@ int main() {
 	cout << "Please enter the filename of your maze: ";
 	cin >> mazeFile;
 	*/
+
 	mazeFile = "maze.txt";
 	Maze* maze = new Maze(mazeFile);
 	Player* player = new Player();
 
-	Game(maze, player);
-	
+	Game game = Game(maze, player);
+	std::cout << game.GetCurrentRoomName();
+	game.DisplayItems();
+	game.DisplayPassages();
 
 	return 0;
 }

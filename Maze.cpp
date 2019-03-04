@@ -48,13 +48,10 @@ void Maze::LoadMaze() {
 		std::string westPassage = resizedLine.substr(0, pos);
 
 		resizedLine = resizedLine.substr(pos + 1);
-		std::cout << "items: " << resizedLine << std::endl;
 
 		this->rooms[rowCount][colCount] = Room(name, CreatePassage(northPassage), 
 			CreatePassage(eastPassage),	CreatePassage(southPassage), 
 			CreatePassage(westPassage));
-
-		std::cout << "item line size: " << resizedLine.size() << std::endl;
 		
 		if (resizedLine.size() != 0) {
 
@@ -117,7 +114,7 @@ Passage* Maze::CreatePassage(std::string type) {
 	else {
 
 		//makes a passage that is either a door or a wall
-		if (type.compare("+")) {
+		if (type.compare("+") == 0) {
 			return new Passage(true);
 		}
 
