@@ -29,7 +29,7 @@ Game::Game(Maze* maze, Player* player) {
 
 void Game::DisplayItems() {
 
-	std::cout << "You are in " << GetCurrentRoomName() << std::endl;
+	std::cout << "\nYou are in " << GetCurrentRoomName() << std::endl;
 
 	std::string temp = this->currentRoom->AcquireNextItem();
 	
@@ -66,7 +66,7 @@ void Game::DisplayPassages() {
 
 std::string Game::GetCurrentRoomName() {
 
-	return "\nYou are in " + this->currentRoom->GetName() + "!\n";
+	return this->currentRoom->GetName();
 }
 
 void Game::LootRoom() {

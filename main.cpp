@@ -37,8 +37,6 @@ int main() {
 
 	} while (!game.ExitFound());
 
-	std::cout << "You made it out in " << game.
-
 	return 0;
 }
 
