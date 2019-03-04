@@ -15,16 +15,11 @@ int main() {
 
 	cout << "Welcome to The Maze\n";
 
-
 	cout << "Please enter the filename of your maze: ";
+
 	cin >> mazeFile;
 
-	//mazeFile = "maze.txt";
-
-	Maze* maze = new Maze(mazeFile);
-	Player* player = new Player();
-
-	Game game = Game(maze, player);
+	Game game = Game(new Maze(mazeFile), new Player());
 
 	do {
 		game.DisplayItems();
