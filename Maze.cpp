@@ -52,16 +52,14 @@ void Maze::LoadMaze() {
 		this->rooms[rowCount][colCount] = Room(name, CreatePassage(northPassage), 
 			CreatePassage(eastPassage),	CreatePassage(southPassage), 
 			CreatePassage(westPassage));
-		
+
 		if (resizedLine.size() != 0) {
 
 			pos = resizedLine.find(' ');
 
-			if (pos != std::string::npos) {
+			if (pos != -1) {
 
-				this->rooms[rowCount][colCount].AddItem(resizedLine.substr(0, pos));
-
-				resizedLine = resizedLine.substr(pos + 1);
+				this->GetRoom(rowCount, colCount)->AddItem(resizedLine.substr(0, pos));
 
 				do {
 
@@ -69,16 +67,16 @@ void Maze::LoadMaze() {
 
 					pos = resizedLine.find(' ');
 
-					if (pos != std::string::npos) {
+					if (pos != -1) {
 
-						this->rooms[rowCount][colCount].AddItem(resizedLine.substr(0, pos));
+						this->GetRoom(rowCount, colCount)->AddItem(resizedLine.substr(0, pos));
 
 						resizedLine = resizedLine.substr(pos + 1);
 					}
 
 					else {
 						
-						this->rooms[rowCount][colCount].AddItem(resizedLine);
+						this->GetRoom(rowCount, colCount)->AddItem(resizedLine);
 					}
 
 				} while (pos != std::string::npos);
@@ -86,7 +84,7 @@ void Maze::LoadMaze() {
 
 			else {
 
-				this->rooms[rowCount][colCount].AddItem(resizedLine);
+				this->GetRoom(rowCount, colCount)->AddItem(resizedLine);
 			}
 		}
 

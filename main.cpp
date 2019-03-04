@@ -11,6 +11,7 @@ using namespace std;
 int main() {
 
 	string mazeFile;
+	string direction;
 
 	cout << "Welcome to The Maze\n";
 	/*
@@ -23,7 +24,6 @@ int main() {
 	Player* player = new Player();
 
 	Game game = Game(maze, player);
-	std::cout << game.GetCurrentRoomName();
 	game.DisplayItems();
 	game.DisplayPassages();
 

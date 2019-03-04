@@ -25,28 +25,43 @@ Game::Game(Maze* maze, Player* player) {
 	this->maze = maze;
 	this->player = player;
 	this->currentRoom = maze->GetRoom(0, 0);
-
-	LootRoom();
 }
 
 void Game::DisplayItems() {
 
-	std::cout << "You picked up the following room items:";
-	int itemNum = this->currentItems.size();
-	for (int i = 0; i < itemNum; ++i) {
-		std::cout << " " << this->currentItems.at(i);
-		this->player->AddItem(this->currentItems.at(i));
+	std::cout << "You are in " << GetCurrentRoomName() << std::endl;
+
+	std::string temp = this->currentRoom->AcquireNextItem();
+	
+	if (temp != "") {
+
+		std::cout << "Current Room Items Collected:";
+		
+		do {
+
+			this->currentItems.push_back(temp);
+
+			std::cout << " " << temp;
+			
+			temp = this->currentRoom->AcquireNextItem();
+
+		} while (temp != "");
+
+		std::cout << std::endl;
+
+		LootRoom();
 	}
-	std::cout << std::endl;
 }
 
 void Game::DisplayPassages() {
 
 	std::cout << GetPassageDescription(this->currentRoom->GetNorthPassage()) << "North\n";
+	
 	std::cout << GetPassageDescription(this->currentRoom->GetEastPassage()) << "East\n";
+	
 	std::cout << GetPassageDescription(this->currentRoom->GetSouthPassage()) << "South\n";
+	
 	std::cout << GetPassageDescription(this->currentRoom->GetWestPassage()) << "West\n";
-
 }
 
 std::string Game::GetCurrentRoomName() {
@@ -56,13 +71,11 @@ std::string Game::GetCurrentRoomName() {
 
 void Game::LootRoom() {
 
-	std::string temp = this->currentRoom->AcquireNextItem();
+	int numItems = this->currentItems.size();
+	
+	for (int i = 0; i < numItems; ++i) {
 
-	while (temp != "") {
-		std::cout << temp << std::endl;
-		this->currentItems.push_back(temp);
-		temp = this->currentRoom->AcquireNextItem();
-		this->player->AddItem(temp);
+		this->player->AddItem(this->currentItems.at(i));
 	}
 }
 
@@ -72,6 +85,7 @@ bool Game::ValidDirection(std::string direction) {
 }
 
 void Game::MoveDirection(std::string direction) {
+
 	this->currentRoom = maze->GetRoom(player->GetRow(),
 		player->GetCol());
 }

@@ -1,14 +1,8 @@
 #include"Room.hpp"
-
+#include<iostream>
 Room::Room() {
 
 	this->name = "";
-	/*
-	this->northPassage = NULL;
-	this->eastPassage = NULL;
-	this->southPassage = NULL;
-	this->westPassage = NULL;
-	*/
 }
 
 Room::Room(std::string name, Passage* northPassage, Passage* eastPassage,
@@ -48,7 +42,7 @@ Passage* Room::GetWestPassage() {
 
 void Room::AddItem(std::string item) {
 
-	this->items.push_back(name);
+	this->items.push_back(item);
 }
 
 std::string Room::AcquireNextItem() {
@@ -57,9 +51,10 @@ std::string Room::AcquireNextItem() {
 	
 	if (this->items.size() != 0) {
 		
-		std::string temp = this->items.at(items.size() - 1);
+		temp = this->items.front();
+		
 		items.erase(items.begin());
 	}
-
+	
 	return temp;
 }

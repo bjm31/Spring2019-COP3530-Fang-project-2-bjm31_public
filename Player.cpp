@@ -17,11 +17,14 @@ int Player::GetCol() {
 }
 
 void Player::SetPosition(int row, int col) {
+	
 	this->row = row;
+	
 	this->col = col;
 }
 
 void Player::AddItem(std::string item) {
+	
 	this->items.push_back(item);
 }
 
