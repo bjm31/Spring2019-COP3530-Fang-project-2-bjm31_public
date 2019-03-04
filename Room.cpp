@@ -1,5 +1,5 @@
 #include"Room.hpp"
-#include<iostream>
+
 Room::Room() {
 
 	this->name = "";
