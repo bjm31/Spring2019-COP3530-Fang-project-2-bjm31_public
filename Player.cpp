@@ -28,7 +28,7 @@ void Player::AddItem(std::string item) {
 	this->items.push_back(item);
 }
 
-bool Player::Hasitem(std::string item) {
+bool Player::HasItem(std::string item) {
 
 	for (int i = 0; i < this->items.size(); ++i) {
 		if (this->items.at(i) == item) {
@@ -36,7 +36,6 @@ bool Player::Hasitem(std::string item) {
 		}
 	}
 
-	std::cout << "Have not obtained the " << item << " yet!\n";
 	return false;
 }
 

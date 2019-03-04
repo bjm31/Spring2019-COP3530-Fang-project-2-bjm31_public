@@ -12,7 +12,7 @@ public:
 	int GetCol();
 	void SetPosition(int row, int col);
 	void AddItem(std::string item);
-	bool Hasitem(std::string item);
+	bool HasItem(std::string item);
 	void UseItem(std::string item);
 	int GetMoveCount();
 	void IncrementMoves();

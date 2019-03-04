@@ -85,7 +85,7 @@ bool Game::ValidDirection(std::string direction) {
 	
 	if (direction == "n") {
 		check = this->currentRoom->GetNorthPassage()->IsOpen();
-		if (!check && this->player->Hasitem(this->currentRoom->GetNorthPassage()->GetRequiredKey())) {
+		if (!check && this->player->HasItem(this->currentRoom->GetNorthPassage()->GetRequiredKey())) {
 			this->currentRoom->GetNorthPassage()->Open();
 			check = true;
 		}
@@ -93,7 +93,7 @@ bool Game::ValidDirection(std::string direction) {
 
 	else if (direction == "e") {
 		check = this->currentRoom->GetEastPassage()->IsOpen();
-		if (!check && this->player->Hasitem(this->currentRoom->GetEastPassage()->GetRequiredKey())) {
+		if (!check && this->player->HasItem(this->currentRoom->GetEastPassage()->GetRequiredKey())) {
 			this->currentRoom->GetEastPassage()->Open();
 			check = true;
 		}
@@ -101,7 +101,7 @@ bool Game::ValidDirection(std::string direction) {
 
 	else if (direction == "s") {
 		check = this->currentRoom->GetSouthPassage()->IsOpen();
-		if (!check && this->player->Hasitem(this->currentRoom->GetSouthPassage()->GetRequiredKey())) {
+		if (!check && this->player->HasItem(this->currentRoom->GetSouthPassage()->GetRequiredKey())) {
 			this->currentRoom->GetSouthPassage()->Open();
 			check = true;
 		}
@@ -109,7 +109,7 @@ bool Game::ValidDirection(std::string direction) {
 
 	else if (direction == "w") {
 		check = this->currentRoom->GetWestPassage()->IsOpen();
-		if (!check && this->player->Hasitem(this->currentRoom->GetWestPassage()->GetRequiredKey())) {
+		if (!check && this->player->HasItem(this->currentRoom->GetWestPassage()->GetRequiredKey())) {
 			this->currentRoom->GetWestPassage()->Open();
 			check = true;
 		}
